@@ -1,51 +1,73 @@
-This project has been created as part of the 42 curriculum by jbutragu.
+*Este proyecto ha sido creado como parte del currículo de 42 por jbutragu.*
 
 # Inception
 
-## Description
+## Descripción
 
-The **Inception** project introduces containerization and service orchestration using **Docker** and **Docker Compose**.  
-The goal is to build a small infrastructure composed of multiple services running in isolated containers, while respecting strict security and design constraints.
+**Inception** es un proyecto cuyo objetivo principal es aprender a usar **Docker** para crear y gestionar varios servicios que funcionan juntos, pero de forma **aislada**.  
+La idea es simular cómo se despliega una aplicación real en un servidor, usando contenedores en lugar de instalar todo directamente en el sistema.
 
-The project simulates a real-world deployment scenario by configuring:
-- An **NGINX** web server with TLS
-- A **WordPress** application
-- A **MariaDB** database
+En este proyecto se construye una pequeña infraestructura compuesta por:
+- Un servidor web (**NGINX**) que recibe las peticiones del navegador
+- Una página web hecha con **WordPress**
+- Una base de datos **MariaDB**, donde WordPress guarda la información
 
-Each service runs in its own Docker container, connected through a dedicated Docker network, and persists data using Docker volumes.
+Cada uno de estos servicios se ejecuta en su **propio contenedor**, lo que significa que están separados entre sí y no interfieren con el sistema principal.
 
-This project emphasizes **system administration**, **networking**, **security**, and **DevOps best practices**.
+Este proyecto está pensado para principiantes y sirve para entender:
+- Qué es Docker y para qué sirve
+- Cómo se comunican varios servicios entre sí
+- Cómo mantener una aplicación organizada, segura y fácil de mantener
 
 ---
 
-## Project Architecture
+## ¿Qué es Docker y por qué se usa?
 
-The infrastructure consists of the following containers:
+Docker es una herramienta que permite ejecutar programas dentro de **contenedores**.  
+Un contenedor es como una “mini-computadora” que contiene solo lo necesario para que un programa funcione.
+
+Las ventajas principales de Docker son:
+- Todo funciona igual en cualquier ordenador
+- Los servicios están aislados y no se rompen entre sí
+- Es fácil iniciar, parar o reconstruir todo el proyecto
+
+---
+
+## Arquitectura del Proyecto (explicada de forma simple)
+
+El proyecto tiene **tres contenedores**, cada uno con una función clara:
 
 - **NGINX**
-  - Acts as a reverse proxy
-  - Handles HTTPS connections using TLS
-- **WordPress**
-  - PHP-FPM based WordPress application
-- **MariaDB**
-  - Relational database backend for WordPress
+  - Es el punto de entrada
+  - Recibe las peticiones del navegador
+  - Usa HTTPS (TLS) para que la conexión sea segura
 
-All services are orchestrated using **Docker Compose** and communicate through a private Docker network.
+- **WordPress**
+  - Es la página web que ve el usuario
+  - Se ejecuta con PHP-FPM
+  - Se conecta a la base de datos para guardar información
+
+- **MariaDB**
+  - Guarda los datos de WordPress
+  - No es accesible desde fuera, solo desde WordPress
+
+Todos los contenedores están conectados a una **red privada de Docker**, de forma que solo pueden comunicarse entre ellos.
 
 ---
 
-## Instructions
+## Instrucciones
 
-### Requirements
+### Requisitos
 
+Para poder ejecutar el proyecto necesitas:
 - Docker
 - Docker Compose
-- GNU Make (optional but recommended)
+- Make (opcional, pero facilita los comandos)
 
-### Installation
+### Instalación
 
-Clone the repository:
+Clona el repositorio y entra en la carpeta:
 
 ```bash
-git clone https://github.com/<login1>/inception.git
+git clone https://github.com/jbutragu/inception.git
 cd inception
