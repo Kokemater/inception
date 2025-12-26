@@ -48,11 +48,9 @@ Todos los servicios están conectados mediante una **Docker Network privada**, e
 
 ### Instalación
 
-git clone .
-cd inception/
+git clone https://github.com/jbutragu/inception.git
+cd inception
 make
-
-
 
 
 ## Descripción del Proyecto, Uso de Docker y Decisiones de Diseño
@@ -76,7 +74,7 @@ La orquestación de todos los contenedores se realiza mediante **Docker Compose*
 
 ### Fuentes Incluidas en el Proyecto
 
-El proyecto incluye únicamente archivos creados específicamente para esta infraestructura, sin usar imágenes preconfiguradas externas (excepto imágenes base oficiales).
+El proyecto incluye únicamente archivos creados específicamente para esta infraestructura, sin usar imágenes preconfiguradas externas (excepto imágenes base oficiales, como Alpine).
 
 Las fuentes incluidas son:
 - Un `Dockerfile` por cada servicio (NGINX, WordPress y MariaDB)
@@ -86,7 +84,6 @@ Las fuentes incluidas son:
   - Scripts de inicialización de WordPress
   - Scripts de inicialización de MariaDB
 
-Solo se utilizan **imágenes base oficiales** (Debian o Alpine), garantizando transparencia y control total sobre el entorno.
 
 ---
 
@@ -118,7 +115,7 @@ Docker se elige por su eficiencia, rapidez y adecuación a entornos modernos de 
 - Diseñados para proteger información sensible
 - Más seguros en producción
 
-En este proyecto se utilizan **variables de entorno**, almacenadas en archivos `.env` que no se incluyen en el repositorio, siguiendo las indicaciones del enunciado.
+En este proyecto se utilizan **variables de entorno**, almacenadas en archivos `.env` y también **Secrets**, guardadas en una carpeta de secretos que no se ha subido al repositorio siguiendo las indicaciones del subject.
 
 ---
 
@@ -151,5 +148,4 @@ El proyecto utiliza una **Docker Network privada** para aislar los servicios del
 
 Se utilizan **Docker Volumes** para asegurar la persistencia de los datos de WordPress y MariaDB, incluso tras reiniciar o reconstruir los contenedores.
 
-git clone https://github.com/jbutragu/inception.git
-cd inception
+
