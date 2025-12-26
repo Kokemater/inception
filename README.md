@@ -51,6 +51,18 @@ git clone https://github.com/jbutragu/inception.git
 cd inception
 make
 
+## Resources
+
+The resources used for this project include the official documentation of WordPress, MariaDB, Nginx, Docker, and a tutorial on deploying a LEMP stack with Docker. Specifically:
+
+- **WordPress Documentation**: https://wordpress.org/documentation/  
+- **MariaDB Documentation**: https://mariadb.com/docs  
+- **Nginx Beginner’s Guide**: https://nginx.org/en/docs/beginners_guide.html  
+- **Docker Get Started Guide**: https://docs.docker.com/get-started/introduction/  
+- **LEMP Stack on Docker Tutorial**: https://www.hostmycode.in/tutorials/lemp-stack-on-docker  
+
+Additionally, **ChatGPT** (https://chatgpt.com/) was used to clarify concepts and provide explanations when needed.
+
 
 ## Project Description, Use of Docker, and Design Decisions
 
