@@ -4,22 +4,21 @@ Este proyecto ha sido creado como parte del currículo de 42 por jbutragu.
 
 ## Descripción
 
-**Inception** es un proyecto centrado en la creación de una infraestructura web básica utilizando **Docker** y **Docker Compose**, con el objetivo de comprender cómo se despliegan aplicaciones modernas de forma modular, reproducible y segura.
+**Inception** es un proyecto centrado en la creación de una infraestructura web utilizando **Docker** y **Docker Compose**, con el objetivo de comprender cómo se despliegan aplicaciones de forma modular, reproducible y segura.
 
 El proyecto consiste en levantar varios servicios independientes que cooperan entre sí, cada uno ejecutándose en su propio contenedor. Esta separación permite aislar responsabilidades, mejorar la seguridad y facilitar el mantenimiento.
 
 La infraestructura está compuesta por:
-- **NGINX**, como servidor web y reverse proxy con TLS
+- **NGINX**, como servidor web con TLS
 - **WordPress**, como aplicación web dinámica
 - **MariaDB**, como sistema gestor de bases de datos
 
-El enfoque del proyecto es práctico y está orientado a adquirir bases sólidas en **DevOps**, **administración de sistemas** y **redes**.
 
 ---
 
 ## Arquitectura del Proyecto
 
-La arquitectura sigue un modelo de microservicios simple:
+La arquitectura sigue un modelo de microservicios:
 
 - **NGINX**
   - Punto de entrada a la infraestructura
@@ -62,9 +61,8 @@ En este proyecto se utiliza **Docker** para crear una infraestructura modular en
 Docker se encarga de:
 - Crear entornos reproducibles
 - Aislar dependencias entre servicios
-- Facilitar la gestión del ciclo de vida de los servicios (build, start, stop, restart)
 
-La orquestación de todos los contenedores se realiza mediante **Docker Compose**, que define de forma declarativa:
+La composición de todos los contenedores se realiza mediante **Docker Compose**:
 - Los servicios
 - Las redes
 - Los volúmenes
@@ -78,7 +76,7 @@ El proyecto incluye únicamente archivos creados específicamente para esta infr
 
 Las fuentes incluidas son:
 - Un `Dockerfile` por cada servicio (NGINX, WordPress y MariaDB)
-- Un archivo `docker-compose.yml` para la orquestación
+- Un archivo `docker-compose.yml` para la composición
 - Archivos de configuración personalizados:
   - Configuración de NGINX
   - Scripts de inicialización de WordPress
@@ -101,7 +99,7 @@ Las fuentes incluidas son:
 - Más ligero y rápido
 - Ideal para arquitecturas basadas en servicios
 
-Docker se elige por su eficiencia, rapidez y adecuación a entornos modernos de despliegue.
+Docker se elige por su eficiencia, rapidez y adecuación a entornos de despliegue.
 
 ---
 
