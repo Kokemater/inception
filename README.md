@@ -1,149 +1,148 @@
-Este proyecto ha sido creado como parte del currículo de 42 por jbutragu.
+*This project has been created as part of the 42 curriculum by jbutragu*
 
 # Inception
 
-## Descripción
+## Description
 
-**Inception** es un proyecto centrado en la creación de una infraestructura web utilizando **Docker** y **Docker Compose**, con el objetivo de comprender cómo se despliegan aplicaciones de forma modular, reproducible y segura.
+**Inception** is a project focused on building a web infrastructure using **Docker** and **Docker Compose**, with the goal of understanding how applications are deployed in a modular, reproducible, and secure way.
 
-El proyecto consiste en levantar varios servicios independientes que cooperan entre sí, cada uno ejecutándose en su propio contenedor. Esta separación permite aislar responsabilidades, mejorar la seguridad y facilitar el mantenimiento.
+The project consists of bringing up several independent services that cooperate with each other, each one running in its own container. This separation allows responsibilities to be isolated, improves security, and facilitates maintenance.
 
-La infraestructura está compuesta por:
-- **NGINX**, como servidor web con TLS
-- **WordPress**, como aplicación web dinámica
-- **MariaDB**, como sistema gestor de bases de datos
-
+The infrastructure is composed of:
+- **NGINX**, as a web server with TLS
+- **WordPress**, as a dynamic web application
+- **MariaDB**, as the database management system
 
 ---
 
-## Arquitectura del Proyecto
+## Project Architecture
 
-La arquitectura sigue un modelo de microservicios:
+The architecture follows a microservices model:
 
 - **NGINX**
-  - Punto de entrada a la infraestructura
-  - Maneja las conexiones HTTPS
-  - Redirige las peticiones al contenedor de WordPress
+  - Entry point to the infrastructure
+  - Handles HTTPS connections
+  - Redirects requests to the WordPress container
 
 - **WordPress**
-  - Ejecuta la lógica de la aplicación web
-  - Se comunica con la base de datos para almacenar contenido
+  - Executes the web application logic
+  - Communicates with the database to store content
 
 - **MariaDB**
-  - Almacena los datos persistentes
-  - Solo es accesible desde la red interna de Docker
+  - Stores persistent data
+  - Only accessible from Docker’s internal network
 
-Todos los servicios están conectados mediante una **Docker Network privada**, evitando exposiciones innecesarias al exterior.
+All services are connected through a **private Docker Network**, avoiding unnecessary exposure to the outside.
 
 ---
 
-## Instrucciones
+## Instructions
 
-### Requisitos
+### Requirements
 
 - Docker
 - Docker Compose
 - Make
 
-### Instalación
+### Installation
 
+bash:
 git clone https://github.com/jbutragu/inception.git
 cd inception
 make
 
 
-## Descripción del Proyecto, Uso de Docker y Decisiones de Diseño
+## Project Description, Use of Docker, and Design Decisions
 
-### Uso de Docker en el Proyecto
+### Use of Docker in the Project
 
-En este proyecto se utiliza **Docker** para crear una infraestructura modular en la que cada servicio se ejecuta en un contenedor independiente. Esto permite aislar responsabilidades, mejorar la seguridad y facilitar tanto el despliegue como el mantenimiento.
+In this project, **Docker** is used to create a modular infrastructure in which each service runs in an independent container. This allows responsibilities to be isolated, improves security, and simplifies both deployment and maintenance.
 
-Docker se encarga de:
-- Crear entornos reproducibles
-- Aislar dependencias entre servicios
+Docker is responsible for:
+- Creating reproducible environments
+- Isolating dependencies between services
 
-La composición de todos los contenedores se realiza mediante **Docker Compose**:
-- Los servicios
-- Las redes
-- Los volúmenes
-- Las variables de entorno necesarias
-
----
-
-### Fuentes Incluidas en el Proyecto
-
-El proyecto incluye únicamente archivos creados específicamente para esta infraestructura, sin usar imágenes preconfiguradas externas (excepto imágenes base oficiales, como Alpine).
-
-Las fuentes incluidas son:
-- Un `Dockerfile` por cada servicio (NGINX, WordPress y MariaDB)
-- Un archivo `docker-compose.yml` para la composición
-- Archivos de configuración personalizados:
-  - Configuración de NGINX
-  - Scripts de inicialización de WordPress
-  - Scripts de inicialización de MariaDB
-
+The composition of all containers is handled through **Docker Compose**, which defines:
+- Services
+- Networks
+- Volumes
+- Required environment variables
 
 ---
 
-## Comparación de Decisiones Técnicas
+### Sources Included in the Project
+
+The project includes only files specifically created for this infrastructure, without using preconfigured external images (except official base images, such as Alpine).
+
+The included sources are:
+- One `Dockerfile` per service (NGINX, WordPress, and MariaDB)
+- A `docker-compose.yml` file for composition
+- Custom configuration files:
+  - NGINX configuration
+  - WordPress initialization scripts
+  - MariaDB initialization scripts
+
+---
+
+## Comparison of Technical Decisions
 
 ### Virtual Machines vs Docker
 
-**Máquinas Virtuales**:
-- Ejecutan un sistema operativo completo
-- Mayor consumo de CPU, memoria y almacenamiento
-- Arranque lento
+**Virtual Machines**:
+- Run a full operating system
+- Higher CPU, memory, and storage consumption
+- Slow startup
 
 **Docker**:
-- Comparte el kernel del sistema host
-- Más ligero y rápido
-- Ideal para arquitecturas basadas en servicios
+- Shares the host system’s kernel
+- Lighter and faster
+- Ideal for service-based architectures
 
-Docker se elige por su eficiencia, rapidez y adecuación a entornos de despliegue.
+Docker is chosen for its efficiency, speed, and suitability for deployment environments.
 
 ---
 
-### Secrets vs Variables de Entorno
+### Secrets vs Environment Variables
 
-**Variables de Entorno**:
-- Simples de configurar
-- Adecuadas para proyectos educativos y entornos controlados
+**Environment Variables**:
+- Simple to configure
+- Suitable for educational projects and controlled environments
 
 **Secrets**:
-- Diseñados para proteger información sensible
-- Más seguros en producción
+- Designed to protect sensitive information
+- More secure in production
 
-En este proyecto se utilizan **variables de entorno**, almacenadas en archivos `.env` y también **Secrets**, guardadas en una carpeta de secretos que no se ha subido al repositorio siguiendo las indicaciones del subject.
+In this project, **environment variables** are used, stored in `.env` files, and **Secrets** are also used, saved in a secrets directory that has not been uploaded to the repository, following the subject’s guidelines.
 
 ---
 
 ### Docker Network vs Host Network
 
 **Host Network**:
-- El contenedor comparte directamente la red del sistema host
-- Menor aislamiento y mayor riesgo de conflictos de puertos
+- The container directly shares the host system’s network
+- Less isolation and higher risk of port conflicts
 
 **Docker Network**:
-- Red virtual aislada
-- Comunicación controlada entre contenedores
-- Mayor seguridad
+- Isolated virtual network
+- Controlled communication between containers
+- Improved security
 
-El proyecto utiliza una **Docker Network privada** para aislar los servicios del host y entre sí.
+The project uses a **private Docker Network** to isolate services from the host and from each other.
 
 ---
 
 ### Docker Volumes vs Bind Mounts
 
 **Bind Mounts**:
-- Usan rutas del sistema host
-- Dependientes de la estructura del sistema
-- Pueden causar problemas de permisos
+- Use host system paths
+- Dependent on host directory structure
+- Can cause permission issues
 
 **Docker Volumes**:
-- Gestionados por Docker
-- Más portables y seguros
-- Recomendados para producción
+- Managed by Docker
+- More portable and secure
+- Recommended for production
 
-Se utilizan **Docker Volumes** para asegurar la persistencia de los datos de WordPress y MariaDB, incluso tras reiniciar o reconstruir los contenedores.
+**Docker Volumes** are used to ensure persistence of WordPress and MariaDB data, even after restarting or rebuilding the containers.
 
 
